@@ -1,0 +1,36 @@
+export const SITE = {
+  name: "BJUFILA Cleaning & Dishwashing Services",
+  shortName: "BJUFILA",
+  legalName: "BJUFILA Cleaning and Dishwashing Services LLC",
+  tagline: "Orlando's Spotless Standard in Commercial Cleaning",
+  url: "https://bjufilacds.com",
+  phone: "(407) 286-0078",
+  phoneHref: "tel:+14072860078",
+  email: "sales@bjufilacds.com",
+  emailHref: "mailto:sales@bjufilacds.com",
+  city: "Orlando",
+  region: "FL",
+  regionName: "Florida",
+  serviceArea: [
+    "Orlando",
+    "Winter Park",
+    "Kissimmee",
+    "Lake Nona",
+    "Altamonte Springs",
+    "Maitland",
+    "Sanford",
+    "Downtown Orlando",
+  ],
+  hours: "Mon–Fri 9:00 AM – 5:00 PM",
+  founded: "2019",
+  priceRange: "$$",
+  geo: { lat: 28.5383, lng: -81.3792 },
+};
+
+export const NAV = [
+  { label: "Services", to: "/services" },
+  { label: "Gallery", to: "/gallery" },
+  { label: "Blog", to: "/blog" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+];

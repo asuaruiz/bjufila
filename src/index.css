@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand — derived from BJUFILA logo (royal blue + red) */
+  --color-navy-950: #060f22;
+  --color-navy-900: #0b1f3a;
+  --color-navy-800: #10294c;
+  --color-navy-700: #163a6b;
+  --color-royal-600: #1e4fd6;
+  --color-royal-500: #2563eb;
+  --color-royal-400: #4f83f1;
+  --color-royal-100: #dbe7ff;
+  --color-royal-50: #eef4ff;
+
+  --color-flag-red: #e11d2a;
+  --color-flag-red-dark: #b3121d;
+
+  --color-ink: #0c1524;
+  --color-muted: #56627a;
+  --color-paper: #f6f8fc;
+  --color-mist: #eaf0f9;
+
+  --color-mint-400: #34d0b4;
+
+  --radius-xl2: 1.5rem;
+  --shadow-soft: 0 1px 2px rgba(11, 31, 58, 0.04), 0 8px 30px rgba(11, 31, 58, 0.08);
+  --shadow-lift: 0 30px 60px -25px rgba(11, 31, 58, 0.35);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Allow selection in form inputs */
+input,
+textarea,
+select {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-royal-500);
+  color: #fff;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Utility: fluid display heading */
+.h-hero {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-size: clamp(2.75rem, 7vw, 6rem);
+}
+.h-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 4.4vw, 3.5rem);
+}
+
+/* Backgrounds & atmosphere */
+.bg-mesh {
+  background-color: #071834;
+  background-image:
+    radial-gradient(60% 55% at 12% 8%, rgba(37, 99, 235, 0.55) 0%, transparent 60%),
+    radial-gradient(50% 50% at 92% 22%, rgba(225, 29, 42, 0.28) 0%, transparent 55%),
+    radial-gradient(70% 60% at 78% 100%, rgba(52, 208, 180, 0.20) 0%, transparent 60%);
+}
+.bg-grid {
+  background-image: linear-gradient(rgba(11, 31, 58, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 31, 58, 0.045) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+.noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--color-royal-400), #fff 55%, var(--color-royal-100));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+}
+
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover {
+  background-size: 100% 2px;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float { animation: float 7s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+  html { scroll-behavior: auto; }
+}

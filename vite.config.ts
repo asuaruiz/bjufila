@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     target: "es2020",
+    manifest: true,
   },
   // Bundle deps into the SSR output so the prerender script can import it as pure ESM.
   ssr: {

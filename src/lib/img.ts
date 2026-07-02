@@ -2,9 +2,9 @@ import { SITE } from "./site";
 
 // Self-hosted images (downloaded once from Unsplash into public/images) — same-origin,
 // so it works under any domain (staging or production) and inherits our immutable cache headers.
-// Pre-generated at 640/900/1600px; pick the smallest bucket that covers the requested width
+// Pre-generated at 400/640/900/1000px; pick the smallest bucket that covers the requested width
 // so cards don't ship the same bytes as a full-bleed hero.
-const BUCKETS = [640, 900, 1000] as const;
+const BUCKETS = [400, 640, 900, 1000] as const;
 
 export function ux(id: string, w = 1600, _h?: number, _q?: number) {
   const bucket = BUCKETS.find((b) => w <= b);

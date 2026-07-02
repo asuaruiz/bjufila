@@ -6,7 +6,7 @@ import { PageHero } from "../components/PageHero";
 import { CTASection } from "../components/sections";
 import { Seo, breadcrumbSchema } from "../lib/seo";
 import { SITE } from "../lib/site";
-import { ux, absoluteImg } from "../lib/img";
+import { ux, uxSrcSet, absoluteImg } from "../lib/img";
 import { POSTS_EN, POSTS_ES } from "../data/content";
 import { useT, useLang } from "../lib/useTranslation";
 
@@ -67,7 +67,15 @@ export default function BlogPost() {
           </div>
           <Reveal>
             <div className="mt-6 overflow-hidden rounded-3xl shadow-soft">
-              <img src={ux(post.cover, 1000, 560)} alt={post.title} width={1000} height={560} className="w-full object-cover" />
+              <img
+                src={ux(post.cover, 1000, 560)}
+                srcSet={uxSrcSet(post.cover)}
+                sizes="(min-width: 768px) 720px, 100vw"
+                alt={post.title}
+                width={1000}
+                height={560}
+                className="w-full object-cover"
+              />
             </div>
           </Reveal>
 
@@ -118,7 +126,16 @@ export default function BlogPost() {
                 className="card-hover group grid overflow-hidden rounded-3xl border border-navy-900/8 bg-white shadow-soft sm:grid-cols-[0.9fr_1.1fr]"
               >
                 <div className="h-40 overflow-hidden sm:h-full">
-                  <img src={ux(p.cover, 480, 360)} alt={p.title} width={480} height={360} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img
+                    src={ux(p.cover, 480, 360)}
+                    srcSet={uxSrcSet(p.cover)}
+                    sizes="(min-width: 640px) 40vw, 90vw"
+                    alt={p.title}
+                    width={480}
+                    height={360}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 </div>
                 <div className="p-6">
                   <span className="text-xs font-semibold uppercase tracking-wider text-royal-600">{p.category}</span>

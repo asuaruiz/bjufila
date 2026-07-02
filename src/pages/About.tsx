@@ -4,7 +4,7 @@ import { Reveal } from "../lib/reveal";
 import { PageHero } from "../components/PageHero";
 import { StatsBand, TestimonialWall, CTASection } from "../components/sections";
 import { Seo, breadcrumbSchema, localBusinessSchema } from "../lib/seo";
-import { ux, IMG } from "../lib/img";
+import { ux, uxSrcSet, IMG } from "../lib/img";
 import { SITE } from "../lib/site";
 import { useT, useLang } from "../lib/useTranslation";
 
@@ -45,7 +45,15 @@ export default function About() {
             <Reveal>
               <div className="relative">
                 <div className="overflow-hidden rounded-3xl shadow-lift">
-                  <img src={ux(IMG.team, 900, 620)} alt="BJUFILA commercial cleaning team in Orlando" width={900} height={620} className="w-full object-cover" />
+                  <img
+                    src={ux(IMG.team, 900, 620)}
+                    srcSet={uxSrcSet(IMG.team)}
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    alt="BJUFILA commercial cleaning team in Orlando"
+                    width={900}
+                    height={620}
+                    className="w-full object-cover"
+                  />
                 </div>
                 <div className="absolute -bottom-6 -right-4 rounded-2xl bg-royal-600 px-6 py-5 text-white shadow-lift sm:-right-6">
                   <div className="font-display text-3xl font-bold">Since {SITE.founded}</div>

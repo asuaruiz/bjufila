@@ -165,6 +165,8 @@ export default function Home() {
                   <div className="relative h-44 overflow-hidden">
                     <img
                       src={ux(s.image, 640, 360)}
+                      srcSet={uxSrcSet(s.image)}
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       alt={s.title}
                       width={640}
                       height={360}
@@ -295,6 +297,8 @@ export default function Home() {
                   <div className="h-48 overflow-hidden">
                     <img
                       src={ux(p.cover, 640, 384)}
+                      srcSet={uxSrcSet(p.cover)}
+                      sizes="(min-width: 768px) 33vw, 100vw"
                       alt={p.title}
                       width={640}
                       height={384}

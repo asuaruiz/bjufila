@@ -5,7 +5,7 @@ import { PageHero } from "../components/PageHero";
 import { BeforeAfter } from "../components/BeforeAfter";
 import { CTASection } from "../components/sections";
 import { Seo, breadcrumbSchema } from "../lib/seo";
-import { ux, IMG } from "../lib/img";
+import { ux, uxSrcSet, IMG } from "../lib/img";
 import { GALLERY } from "../data/content";
 import { useT, useLang } from "../lib/useTranslation";
 
@@ -73,6 +73,8 @@ export default function Gallery() {
                 <figure className="group relative overflow-hidden rounded-3xl shadow-soft">
                   <img
                     src={ux(g.id, 640, i % 3 === 1 ? 800 : 520)}
+                    srcSet={uxSrcSet(g.id)}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     alt={`${g.label} — commercial cleaning by BJUFILA in Orlando`}
                     width={640}
                     height={i % 3 === 1 ? 800 : 520}

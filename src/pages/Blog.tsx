@@ -5,7 +5,7 @@ import { Reveal } from "../lib/reveal";
 import { PageHero } from "../components/PageHero";
 import { CTASection } from "../components/sections";
 import { Seo, breadcrumbSchema } from "../lib/seo";
-import { ux } from "../lib/img";
+import { ux, uxSrcSet } from "../lib/img";
 import { POSTS_EN, POSTS_ES } from "../data/content";
 import { useT, useLang } from "../lib/useTranslation";
 
@@ -47,6 +47,8 @@ export default function Blog() {
               <div className="h-64 overflow-hidden lg:h-auto">
                 <img
                   src={ux(feat.cover, 900, 600)}
+                  srcSet={uxSrcSet(feat.cover)}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   alt={feat.title}
                   width={900}
                   height={600}
@@ -81,6 +83,8 @@ export default function Blog() {
                   <div className="h-48 overflow-hidden">
                     <img
                       src={ux(p.cover, 640, 384)}
+                      srcSet={uxSrcSet(p.cover)}
+                      sizes="(min-width: 768px) 33vw, 100vw"
                       alt={p.title}
                       width={640}
                       height={384}

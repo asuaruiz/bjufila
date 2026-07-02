@@ -6,7 +6,7 @@ import { Reveal } from "../lib/reveal";
 import { CTASection, FAQAccordion } from "../components/sections";
 import { PageHero } from "../components/PageHero";
 import { Seo, breadcrumbSchema } from "../lib/seo";
-import { ux } from "../lib/img";
+import { ux, uxSrcSet } from "../lib/img";
 import { SERVICES } from "../data/content";
 import { useT, useLang } from "../lib/useTranslation";
 
@@ -42,6 +42,8 @@ export default function Services() {
                   <div className="relative min-h-[220px] overflow-hidden">
                     <img
                       src={ux(s.image, 800, 560)}
+                      srcSet={uxSrcSet(s.image)}
+                      sizes="(min-width: 768px) 50vw, 100vw"
                       alt={s.title}
                       width={800}
                       height={560}

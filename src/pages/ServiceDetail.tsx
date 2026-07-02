@@ -7,7 +7,7 @@ import { PageHero } from "../components/PageHero";
 import { CTASection } from "../components/sections";
 import { QuoteForm } from "../components/QuoteForm";
 import { Seo, serviceSchema, breadcrumbSchema, truncateAtWord } from "../lib/seo";
-import { ux, absoluteImg } from "../lib/img";
+import { ux, uxSrcSet, absoluteImg } from "../lib/img";
 import { SITE } from "../lib/site";
 import { SERVICES } from "../data/content";
 import { useT, useLang } from "../lib/useTranslation";
@@ -51,6 +51,8 @@ export default function ServiceDetail() {
                 <div className="overflow-hidden rounded-3xl shadow-soft">
                   <img
                     src={ux(service.hero, 1000, 620)}
+                    srcSet={uxSrcSet(service.hero)}
+                    sizes="(min-width: 1024px) 55vw, 100vw"
                     alt={service.title}
                     width={1000}
                     height={620}

@@ -23,7 +23,7 @@ export function Seo({ title, description, path = "/", image, type = "website", s
   const fullTitle = path === "/" ? title : `${title} | ${SITE.shortName}`;
   const ogImage =
     image ||
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&w=1200&fit=crop&h=630&q=72";
+    `${SITE.url}/images/1497366216548-37526070297c.webp`;
   const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
   return (
@@ -67,7 +67,7 @@ export const localBusinessSchema = {
   telephone: "+14072860078",
   email: SITE.email,
   priceRange: SITE.priceRange,
-  image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&w=1200&fit=crop&h=630&q=72",
+  image: `${SITE.url}/images/1497366216548-37526070297c.webp`,
   logo: `${SITE.url}/logo.png`,
   address: {
     "@type": "PostalAddress",

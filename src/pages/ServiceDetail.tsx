@@ -7,7 +7,7 @@ import { PageHero } from "../components/PageHero";
 import { CTASection } from "../components/sections";
 import { QuoteForm } from "../components/QuoteForm";
 import { Seo, serviceSchema, breadcrumbSchema, truncateAtWord } from "../lib/seo";
-import { ux } from "../lib/img";
+import { ux, absoluteImg } from "../lib/img";
 import { SITE } from "../lib/site";
 import { SERVICES } from "../data/content";
 import { useT, useLang } from "../lib/useTranslation";
@@ -26,7 +26,7 @@ export default function ServiceDetail() {
         title={`${service.title} ${lang === "es" ? "en" : "in"} Orlando`}
         description={truncateAtWord(service.intro, 155)}
         path={`/services/${service.slug}`}
-        image={ux(service.hero, 1200, 630)}
+        image={absoluteImg(service.hero)}
         schema={[
           serviceSchema(service.title, service.intro, `/services/${service.slug}`),
           breadcrumbSchema([

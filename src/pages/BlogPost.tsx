@@ -6,7 +6,7 @@ import { PageHero } from "../components/PageHero";
 import { CTASection } from "../components/sections";
 import { Seo, breadcrumbSchema } from "../lib/seo";
 import { SITE } from "../lib/site";
-import { ux } from "../lib/img";
+import { ux, absoluteImg } from "../lib/img";
 import { POSTS_EN, POSTS_ES } from "../data/content";
 import { useT, useLang } from "../lib/useTranslation";
 
@@ -28,7 +28,7 @@ export default function BlogPost() {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    image: ux(post.cover, 1200, 630),
+    image: absoluteImg(post.cover),
     datePublished: post.date,
     author: { "@type": "Organization", name: SITE.legalName },
     publisher: { "@type": "Organization", name: SITE.legalName, logo: { "@type": "ImageObject", url: `${SITE.url}/logo.png` } },
@@ -42,7 +42,7 @@ export default function BlogPost() {
         description={post.excerpt}
         path={`/blog/${post.slug}`}
         type="article"
-        image={ux(post.cover, 1200, 630)}
+        image={absoluteImg(post.cover)}
         schema={[
           articleSchema,
           breadcrumbSchema([

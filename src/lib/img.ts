@@ -1,7 +1,20 @@
-// Unsplash image helper — builds optimized, correctly-sized URLs (prevents CLS + keeps payload small)
-export function ux(id: string, w = 1200, h?: number, q = 68) {
-  const crop = h ? `&fit=crop&h=${h}` : "";
-  return `https://images.unsplash.com/photo-${id}?auto=format&w=${w}${crop}&q=${q}`;
+import { SITE } from "./site";
+
+// Self-hosted images (downloaded once from Unsplash into public/images) — same-origin,
+// so it works under any domain (staging or production) and inherits our immutable cache headers.
+// Pre-generated at 640/900/1600px; pick the smallest bucket that covers the requested width
+// so cards don't ship the same bytes as a full-bleed hero.
+const BUCKETS = [640, 900, 1000] as const;
+
+export function ux(id: string, w = 1600, _h?: number, _q?: number) {
+  const bucket = BUCKETS.find((b) => w <= b);
+  return bucket ? `/images/${id}-${bucket}.webp` : `/images/${id}.webp`;
+}
+
+// Absolute URL for contexts that require one per spec (og:image, schema.org image) —
+// unlike <img src>, these can't rely on same-origin resolution.
+export function absoluteImg(id: string) {
+  return `${SITE.url}${ux(id)}`;
 }
 
 export const IMG = {

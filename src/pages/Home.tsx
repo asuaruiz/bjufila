@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowRight, Star, ShieldCheck, Leaf, Clock, Phone, CheckCircle2 } from "lucide-react";
 import { Container, Button, Eyebrow } from "../components/ui";
 import { Icon } from "../components/Icon";
@@ -6,7 +7,7 @@ import { Reveal } from "../lib/reveal";
 import { BeforeAfter } from "../components/BeforeAfter";
 import { StatsBand, TestimonialWall, FAQAccordion, CTASection } from "../components/sections";
 import { Seo, localBusinessSchema, faqSchema } from "../lib/seo";
-import { ux, IMG } from "../lib/img";
+import { ux, uxSrcSet, IMG } from "../lib/img";
 import { SITE } from "../lib/site";
 import { SERVICES, DIFFERENTIATORS, PROCESS, POSTS_EN, POSTS_ES, FAQS } from "../data/content";
 import { useT, useLang } from "../lib/useTranslation";
@@ -28,6 +29,16 @@ export default function Home() {
         path="/"
         schema={[localBusinessSchema, faqSchema(FAQS)]}
       />
+      <Helmet>
+        <link
+          rel="preload"
+          as="image"
+          href={ux(IMG.mopping, 900, 1000, 74)}
+          imageSrcSet={uxSrcSet(IMG.mopping)}
+          imageSizes="(min-width: 1024px) 45vw, 100vw"
+          fetchPriority="high"
+        />
+      </Helmet>
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-mesh pb-20 pt-32 sm:pb-28 sm:pt-40">
@@ -83,6 +94,8 @@ export default function Home() {
                 <div className="overflow-hidden rounded-[2rem] shadow-lift ring-1 ring-white/10">
                   <img
                     src={ux(IMG.mopping, 900, 1000, 74)}
+                    srcSet={uxSrcSet(IMG.mopping)}
+                    sizes="(min-width: 1024px) 45vw, 100vw"
                     alt="Professional commercial cleaning service disinfecting an Orlando workspace"
                     width={900}
                     height={1000}

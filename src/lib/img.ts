@@ -11,6 +11,13 @@ export function ux(id: string, w = 1600, _h?: number, _q?: number) {
   return bucket ? `/images/${id}-${bucket}.webp` : `/images/${id}.webp`;
 }
 
+// srcset across every generated bucket so the browser can pick the smallest
+// image that still fills its layout slot (crucial on narrow mobile viewports,
+// which would otherwise download the same bytes as a full-bleed desktop hero).
+export function uxSrcSet(id: string) {
+  return BUCKETS.map((b) => `/images/${id}-${b}.webp ${b}w`).join(", ");
+}
+
 // Absolute URL for contexts that require one per spec (og:image, schema.org image) —
 // unlike <img src>, these can't rely on same-origin resolution.
 export function absoluteImg(id: string) {

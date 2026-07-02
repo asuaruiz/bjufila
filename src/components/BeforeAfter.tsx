@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback } from "react";
 import { MoveHorizontal } from "lucide-react";
-import { ux } from "../lib/img";
+import { ux, uxSrcSet } from "../lib/img";
 
 export function BeforeAfter({
   beforeId,
@@ -41,6 +41,8 @@ export function BeforeAfter({
       {/* After (base) */}
       <img
         src={ux(afterId, 900, 675)}
+        srcSet={uxSrcSet(afterId)}
+        sizes="(min-width: 1024px) 50vw, 100vw"
         alt="After professional cleaning"
         width={900}
         height={675}
@@ -56,6 +58,8 @@ export function BeforeAfter({
       <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
         <img
           src={ux(beforeId, 900, 675)}
+          srcSet={uxSrcSet(beforeId)}
+          sizes="(min-width: 1024px) 50vw, 100vw"
           alt="Before cleaning"
           width={900}
           height={675}

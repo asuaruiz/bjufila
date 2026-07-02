@@ -67,13 +67,13 @@ export function Nav() {
 
         <div className="flex items-center gap-2">
           {/* Language selector */}
-          <div className="hidden items-center gap-1 rounded-full bg-white/10 p-1 sm:flex">
+          <div className="hidden items-center gap-1 rounded-full border border-navy-900/10 bg-mist p-1 sm:flex">
             {(["en", "es"] as const).map((l) => (
               <button
                 key={l}
                 onClick={() => setLang(l)}
                 className={`rounded-full px-2.5 py-1.5 text-xs font-semibold transition-colors ${
-                  lang === l ? "bg-white text-royal-600" : "text-white/60 hover:text-white"
+                  lang === l ? "bg-royal-600 text-white" : "text-navy-800/70 hover:text-navy-900"
                 }`}
                 aria-label={`Switch to ${l === "en" ? "English" : "Español"}`}
               >

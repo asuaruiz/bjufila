@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { SITE } from "../lib/site";
+import { SERVICES } from "../data/content";
 import { useLang } from "../lib/useTranslation";
 import { sendChatMessage, submitQuote, type ChatMessage, type ChatLead } from "../lib/supabase";
 
@@ -64,6 +65,17 @@ export function ChatWidget() {
       if (reply) setMessages((m) => [...m, { role: "assistant", content: reply }]);
       if (capturedLead) {
         setLead(capturedLead);
+        if (!reply) {
+          setMessages((m) => [
+            ...m,
+            {
+              role: "assistant",
+              content: es
+                ? `¡Gracias, ${capturedLead.name}! Te llevo a WhatsApp con tus datos ya listos.`
+                : `Thanks, ${capturedLead.name}! Taking you to WhatsApp with your info ready.`,
+            },
+          ]);
+        }
         submitQuote({
           name: capturedLead.name,
           email: "",
@@ -89,6 +101,12 @@ export function ChatWidget() {
   }
 
   const starters = es ? STARTERS_ES : STARTERS_EN;
+  const lastMsg = messages[messages.length - 1];
+  const askingService =
+    !lead &&
+    !thinking &&
+    lastMsg?.role === "assistant" &&
+    /servicio|service/i.test(lastMsg.content);
 
   return (
     <>
@@ -143,6 +161,20 @@ export function ChatWidget() {
                     className="rounded-full border border-royal-500/30 bg-royal-50 px-3.5 py-2 text-xs font-semibold text-royal-600 transition-colors hover:bg-royal-100"
                   >
                     {s}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {askingService && (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {SERVICES.map((s) => (
+                  <button
+                    key={s.slug}
+                    onClick={() => send(s.title)}
+                    className="rounded-full border border-royal-500/30 bg-royal-50 px-3.5 py-2 text-xs font-semibold text-royal-600 transition-colors hover:bg-royal-100"
+                  >
+                    {s.title}
                   </button>
                 ))}
               </div>

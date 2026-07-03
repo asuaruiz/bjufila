@@ -9,6 +9,16 @@ function whatsappLink(message: string) {
   return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
 }
 
+function getSessionId() {
+  const key = "bjufila_chat_session";
+  let id = localStorage.getItem(key);
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem(key, id);
+  }
+  return id;
+}
+
 const STARTERS_EN = ["What areas do you serve?", "How much does it cost?", "I'd like a quote"];
 const STARTERS_ES = ["¿Qué zonas cubren?", "¿Cuánto cuesta?", "Quiero una cotización"];
 
@@ -50,7 +60,7 @@ export function ChatWidget() {
     setMessages(next);
     setThinking(true);
     try {
-      const { reply, lead: capturedLead } = await sendChatMessage(next);
+      const { reply, lead: capturedLead } = await sendChatMessage(next, getSessionId(), lang);
       if (reply) setMessages((m) => [...m, { role: "assistant", content: reply }]);
       if (capturedLead) {
         setLead(capturedLead);

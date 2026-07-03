@@ -1,9 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { LangProvider } from "./lib/useTranslation";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
 import { lazyPreloadable } from "./lib/lazyPreload";
+
+// Plain lazy (not lazyPreloadable/pageForPath) and never preloaded: it's fine
+// for this to render nothing during SSR and resolve after hydration — unlike
+// route content, there's no SSR'd DOM for it to mismatch against, and it
+// keeps the Supabase client out of the bundle every page has to load.
+const ChatWidget = lazy(() => import("./components/ChatWidget").then((m) => ({ default: m.ChatWidget })));
 
 const Home = lazyPreloadable(() => import("./pages/Home"));
 const Services = lazyPreloadable(() => import("./pages/Services"));
@@ -60,6 +66,9 @@ function AppContent() {
         </Routes>
       </main>
       <Footer />
+      <Suspense fallback={null}>
+        <ChatWidget />
+      </Suspense>
     </>
   );
 }

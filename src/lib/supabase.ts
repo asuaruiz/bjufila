@@ -35,3 +35,12 @@ export async function subscribe(email: string) {
   // Ignore duplicate email uniqueness violations gracefully
   if (error && !`${error.message}`.toLowerCase().includes("duplicate")) throw error;
 }
+
+export type ChatMessage = { role: "user" | "assistant"; content: string };
+export type ChatLead = { name: string; phone: string; service: string };
+
+export async function sendChatMessage(messages: ChatMessage[]) {
+  const { data, error } = await supabase.functions.invoke("bjufila-chat", { body: { messages } });
+  if (error) throw error;
+  return data as { reply: string; lead: ChatLead | null };
+}
